@@ -1,4 +1,4 @@
-"""Build the River Pulse page, docs/index.html, for every SDL unit of the displayed river systems, from results.db.
+"""Build the River Pulse page, docs/dashboard.html, for every SDL unit of the displayed river systems, from results.db.
 
 The page shows every unit's reaches and SDL boundary on one map. Its data files in docs/data/ are split so each stays
 well under GitHub's file size limit: geometry, a shared evaporation pixel index, and per river system the climate
@@ -33,7 +33,7 @@ from car.build import publish_assets
 
 HERE = Path(__file__).resolve().parent
 TEMPLATE = HERE / "template.html"
-DISPLAY_FILE = HERE.parent / "docs" / "index.html"
+DISPLAY_FILE = HERE.parent / "docs" / "dashboard.html"
 DATA_DIR = HERE.parent / "docs" / "data"
 CONTEXT_RIVERS = 120  # per river system: longest other named rivers drawn as thin context lines
 

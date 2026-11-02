@@ -2,7 +2,7 @@
 
 A realistic 3D map of the Murray–Darling Basin region, forked from `mdb-model`. Climate and hydrology modelling are out of scope here; only the geography is used: the SDL unit outlines, terrain and river network for the Murrumbidgee, ACT, Lachlan, Lower Darling, NSW and Victorian Murray, Goulburn–Broken, Loddon and Wimmera–Mallee (`DISPLAY_SYSTEMS` in `1_masking/config.py`).
 
-Play it at https://aracingcar.github.io/3d-game/game/ (page and code in `docs/game/`). Rebuild its data in `docs/game/data/` with `python game/build_map.py` (needs the DEM tile cache, SDL outlines and OSM waterways in `data/input/`, see the download scripts).
+Play it at https://aracingcar.github.io/3d-game/ (page `docs/index.html`, code and data in `docs/game/`). Rebuild its data in `docs/game/data/` with `python game/build_map.py` (needs the DEM tile cache, SDL outlines and OSM waterways in `data/input/`, see the download scripts).
 
 The original model README follows.
 
@@ -19,7 +19,7 @@ Daily climate-to-ecology chain for Murray–Darling Basin surface water SDL reso
    `downloads`: the scripts that fetch inputs (SDL outlines, AWO climate, gauge flow, OSM waterways, roads and storages; the NARCliM download stays in `1_masking`, which runs it). `tests`: the Python (`python -m unittest discover -s tests -p 'test_*.py'`) and JavaScript (`node --test tests/*.test.cjs`) tests.
 4. `4_ecology`: fish cease-to-flow refuge survival, colonial waterbird breeding trigger, river red gum condition, at each unit's outlet.
 5. `5_outputs`: stores geometry and results in `data/results.db` (SQLite, git-ignored), one row per SDL unit, climate run and method pair.
-6. `6_display`: builds the River Pulse page, published at `docs/index.html`, with every unit's reaches and SDL boundary on one map.
+6. `6_display`: builds the River Pulse page, published at `docs/dashboard.html`, with every unit's reaches and SDL boundary on one map.
 
 SDL units that share a river network are modelled together as a river system (`SYSTEMS` in `1_masking/config.py`): the upper Murrumbidgee flows into the ACT and the ACT drains back into SS15, so both are routed as one network, and every place a river crosses a unit border ends a reach. Each basin belongs to the unit holding most of its area. Per system the config sets the main-stem reach count, routing calibration (`loss_regions`, `target_outlet_m3s`; `None` leaves flow uncalibrated) and flow splits (a share of a basin's outflow sent to another basin or out of the river); per unit (`SDL_UNITS`) it sets the ecology thresholds (`None`, or a missing indicator, skips it). `main.py` runs each system in its own process (`SYSTEM=lachlan python main.py` runs one) and then builds the page from the database. Rows from before the SDL outlines, built on the CEWO Murrumbidgee valley, are kept under the key `CEWO-MBG`.
 

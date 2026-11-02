@@ -150,7 +150,7 @@ SYSTEMS = {
         "splits": {},
     },
 }
-DISPLAY_SYSTEMS = ("murrumbidgee", "lachlan", "lower_darling", "murray", "goulburn_broken", "loddon", "wimmera_mallee")  # drawn together on docs/index.html
+DISPLAY_SYSTEMS = ("murrumbidgee", "lachlan", "lower_darling", "murray", "goulburn_broken", "loddon", "wimmera_mallee")  # drawn together on docs/dashboard.html
 
 # Cross-system links, from HydroBASINS' downstream links where a system's river leaves it. Each system routes in its own
 # process; a link adds the routed outflow of its basin ``basin`` in system ``from`` to the outlet node of basin ``into`` in

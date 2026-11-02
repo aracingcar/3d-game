@@ -192,7 +192,7 @@ assert(soft.scrub>.97,`a plain landing barely slows the car (kept ${(soft.scrub*
 }
 console.log('Car placement, drag cancellation, invalid drops, animated fall, delayed reset, camera restoration, reuse, arrow keys, wet-boost donuts, landings, the nitro tank, the river boat and the town dash passed.');
 // A second element with id car-dock (the gauge panel dock) once let its CSS hide the vehicle button.
-for (const file of ['../6_display/template.html', '../docs/index.html']) {
+for (const file of ['../6_display/template.html', '../docs/dashboard.html']) {
   const html = fs.readFileSync(__dirname + '/' + file, 'utf8');
   assert.equal((html.match(/\sid="car-dock"/g) || []).length, 0, `${file}: car-dock is the button car.js creates; no markup may reuse it`);
 }

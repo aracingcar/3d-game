@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const $ = (id) => document.getElementById(id);
+const asset = (path) => new URL(path, import.meta.url).href; // data sits beside this script, whichever page loads it
 const SKIRT_Y = -4; // bottom of the block's side walls (km)
 const LABEL_RANGE = { town: 600, river: 750, storage: 500, peak: 600 }; // km beyond which a label fades out
 const HELP = {
@@ -14,8 +15,8 @@ const HELP = {
 let loaded = 0;
 const progress = () => { $("progress").textContent = `${++loaded}/3`; };
 const [meta, heightsBuf] = await Promise.all([
-  fetch("data/meta.json").then((r) => r.json()).then((m) => (progress(), m)),
-  fetch("data/heights.bin").then((r) => r.arrayBuffer()).then((b) => (progress(), b)),
+  fetch(asset("data/meta.json")).then((r) => r.json()).then((m) => (progress(), m)),
+  fetch(asset("data/heights.bin")).then((r) => r.arrayBuffer()).then((b) => (progress(), b)),
 ]);
 const heights = new Int16Array(heightsBuf); // metres, row 0 north
 const W = meta.grid_w, H = meta.grid_h, WIDTH = meta.width_km, DEPTH = meta.height_km;
@@ -62,7 +63,7 @@ const terrainMat = new THREE.MeshStandardMaterial({ roughness: 1, metalness: 0, 
 const terrain = new THREE.Mesh(terrainGeom, terrainMat);
 scene.add(terrain);
 
-new THREE.TextureLoader().load("data/texture.jpg", (tex) => {
+new THREE.TextureLoader().load(asset("data/texture.jpg"), (tex) => {
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
   terrainMat.map = tex;
