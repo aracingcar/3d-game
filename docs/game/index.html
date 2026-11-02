@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murray–Darling 3D</title>
+<link rel="stylesheet" href="game.css">
+<script type="importmap">
+{"imports": {"three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+             "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="labels"></div>
+
+<header class="card" id="title">
+  <h1>Murray–Darling Basin</h1>
+  <p>Southern basin in 3D: terrain from AWS Terrain Tiles, rivers from OpenStreetMap, outline from the MDBA SDL units.</p>
+</header>
+
+<aside class="card" id="panel">
+  <div class="row mode">
+    <button id="mode-orbit" class="on">Orbit</button>
+    <button id="mode-fly">Fly</button>
+  </div>
+  <label class="row">Height ×<output id="exag-out">6</output>
+    <input id="exag" type="range" min="1" max="25" step="0.5" value="6">
+  </label>
+  <label class="row check"><input id="show-labels" type="checkbox" checked> Labels</label>
+  <button id="reset" class="row">Reset view</button>
+  <p id="help" class="help"></p>
+</aside>
+
+<div class="card" id="readout"></div>
+<div id="compass" title="North"><span>N</span></div>
+<div id="loading"><div>Loading the basin… <span id="progress"></span></div></div>
+
+<script type="module" src="game.js"></script>
+</body>
+</html>

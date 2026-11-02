@@ -2,6 +2,8 @@
 
 A realistic 3D map of the Murray–Darling Basin region, forked from `mdb-model`. Climate and hydrology modelling are out of scope here; only the geography is used: the SDL unit outlines, terrain and river network for the Murrumbidgee, ACT, Lachlan, Lower Darling, NSW and Victorian Murray, Goulburn–Broken, Loddon and Wimmera–Mallee (`DISPLAY_SYSTEMS` in `1_masking/config.py`).
 
+Play it at https://aracingcar.github.io/3d-game/game/ (page and code in `docs/game/`). Rebuild its data in `docs/game/data/` with `python game/build_map.py` (needs the DEM tile cache, SDL outlines and OSM waterways in `data/input/`, see the download scripts).
+
 The original model README follows.
 
 ---
