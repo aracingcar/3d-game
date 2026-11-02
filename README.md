@@ -1,3 +1,11 @@
+# 3d-game
+
+A realistic 3D map of the Murray–Darling Basin region, forked from `mdb-model`. Climate and hydrology modelling are out of scope here; only the geography is used: the SDL unit outlines, terrain and river network for the Murrumbidgee, ACT, Lachlan, Lower Darling, NSW and Victorian Murray, Goulburn–Broken, Loddon and Wimmera–Mallee (`DISPLAY_SYSTEMS` in `1_masking/config.py`).
+
+The original model README follows.
+
+---
+
 # MDB model
 
 Daily climate-to-ecology chain for Murray–Darling Basin surface water SDL resource units, currently the Murrumbidgee (SS15), ACT (SS1), Lachlan (SS16), Lower Darling (SS18), NSW Murray (SS14), Victorian Murray (SS2), Goulburn (SS6) and Broken (SS5), run with `python main.py`.

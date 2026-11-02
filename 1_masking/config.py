@@ -42,6 +42,8 @@ SDL_UNITS = {
     "SS5": {"name": "Broken", "system": "goulburn_broken", "ecology": None},
     "SS3": {"name": "Kiewa", "system": "murray", "ecology": None},
     "SS4": {"name": "Ovens", "system": "murray", "ecology": None},
+    "SS8": {"name": "Loddon", "system": "loddon", "ecology": None},
+    "SS9": {"name": "Wimmera–Mallee", "system": "wimmera_mallee", "ecology": None},
 }
 
 # River systems: the units whose rivers form one network, routed together across unit borders (the upper
@@ -132,8 +134,23 @@ SYSTEMS = {
         "storages": {"Eildon Dam": {"lon": 145.92, "lat": -37.22, "max_release_ML_d": 10000},
                      "Lake Nillahcootie": {"lon": 146.01, "lat": -36.89, "max_release_ML_d": 1000}},
     },
+    # Loddon (SS8): the Loddon River runs north to the Murray near Swan Hill; the Avoca River beside it ends in the Kerang lakes.
+    "loddon": {
+        "units": ("SS8",), "n_subcatchments": 10, "mainstem": "Loddon River", "min_network_km2": 500,
+        "other_rivers": ("Murray River",),
+        "routing": {"loss_regions": None, "target_outlet_m3s": None},  # no calibration gauge chosen yet
+        "splits": {},
+    },
+    # Wimmera-Mallee (SS9): the Wimmera River runs north-west from the Grampians to the terminal lakes Hindmarsh and Albacutya and
+    # never reaches the Murray; the Mallee plain has almost no mapped drainage. The Murray corridor is in SS14 (MURRAY_CORRIDOR).
+    "wimmera_mallee": {
+        "units": ("SS9",), "n_subcatchments": 8, "mainstem": "Wimmera River",
+        "other_rivers": ("Murray River",),
+        "routing": {"loss_regions": None, "target_outlet_m3s": None},  # no calibration gauge chosen yet
+        "splits": {},
+    },
 }
-DISPLAY_SYSTEMS = ("murrumbidgee", "lachlan", "lower_darling", "murray", "goulburn_broken")  # drawn together on docs/index.html
+DISPLAY_SYSTEMS = ("murrumbidgee", "lachlan", "lower_darling", "murray", "goulburn_broken", "loddon", "wimmera_mallee")  # drawn together on docs/index.html
 
 # Cross-system links, from HydroBASINS' downstream links where a system's river leaves it. Each system routes in its own
 # process; a link adds the routed outflow of its basin ``basin`` in system ``from`` to the outlet node of basin ``into`` in
@@ -153,6 +170,15 @@ LINKS = (
     {"from": "goulburn_broken", "basin": "B5080603740", "to": "murray", "into": "B5080603920"},
     # Campaspe River at Echuca.
     {"from": "goulburn_broken", "basin": "B5080603970", "to": "murray", "into": "B5080603900"},
+    # Loddon River (B5080601450, at Kerang) joins the Murray near Swan Hill. The Avoca (B5080602440), Bendigo Creek (B5080602360) and
+    # the other creeks that leave the Loddon unit follow HydroBASINS' downstream links to the Murray's Victorian basins, over
+    # unmapped basins outside every system; in fact the Avoca and Bendigo Creek mostly end in the Kerang lakes, so these links
+    # overstate what reaches the Murray.
+    {"from": "loddon", "basin": "B5080601450", "to": "murray", "into": "B5080600010"},
+    {"from": "loddon", "basin": "B5080601760", "to": "murray", "into": "B5080601460"},
+    {"from": "loddon", "basin": "B5080602350", "to": "murray", "into": "B5080601730"},
+    {"from": "loddon", "basin": "B5080602360", "to": "murray", "into": "B5080601730"},
+    {"from": "loddon", "basin": "B5080602440", "to": "murray", "into": "B5080599470"},
     # Lower Darling at Wentworth: the Darling's last basin joins the Murray just below the junction, inside the Murray corridor.
     {"from": "lower_darling", "basin": "B5080591010", "to": "murray", "into": "B5080590940"},
     # Murrumbidgee River at Balranald joins the Murray near Boundary Bend, inside the Murray corridor.

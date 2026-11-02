@@ -1,0 +1,12 @@
+{
+  "source": "OpenStreetMap contributors via Overpass API",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "query": "way[waterway~\"^(river|stream|canal|drain|ditch)$\"] within catchment bounding box, clipped to MDBA SDL resource units SS8 grown by 3 km",
+  "downloaded_at_utc": "2026-10-27T01:29:03.875745+00:00",
+  "elements_in_response": 5632,
+  "features_after_clip": 3964,
+  "output": "data/input/routing/osm_loddon_waterways.geojson",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "license": "Open Database License (ODbL) 1.0",
+  "license_url": "https://www.openstreetmap.org/copyright"
+}
